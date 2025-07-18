@@ -1,0 +1,1 @@
+export function Button({ children, ...props }) { return <button {...props} className='bg-purple-600 text-white p-2 rounded'>{children}</button> }
