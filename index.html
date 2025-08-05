@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiencia Vinilo - Tu DJ Personal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>🎵 Experiencia Vinilo</h1>
+        <p>Descubre la música perfecta para tu evento</p>
+    </div>
+
+    <div class="container">
+        <!-- Carga de archivos -->
+        <div class="upload-section">
+            <h2>📁 Cargar lista de discos</h2>
+            <input type="file" id="fileInput" accept=".csv" />
+        </div>
+
+        <!-- Buscador -->
+        <div class="search-container">
+            <h2>🎯 ¿Qué música buscas para tu evento?</h2>
+            <input type="text" id="searchInput" placeholder="Ej: Quiero música indie de los 2000s con un toque electrónico">
+            <button id="searchBtn">Buscar Recomendaciones</button>
+        </div>
+
+        <!-- Resultados -->
+        <div class="results-container" id="resultsContainer"></div>
+
+        <!-- Botón Instagram -->
+        <div class="instagram-section">
+            <a href="https://instagram.com/experiencia_vinilo" target="_blank" class="instagram-button">📷 Síguenos en Instagram</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
