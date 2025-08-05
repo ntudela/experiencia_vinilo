@@ -69,3 +69,20 @@ button:hover {
     text-decoration: none;
     font-weight: bold;
 }
+/* Botón de búsqueda con estilo retro */
+.search-button {
+    font-family: 'Courier New', monospace;
+    background: #d4af37;
+    color: #2c1810;
+    font-size: 1rem;
+    border: 2px solid #2c1810;
+    box-shadow: 2px 2px 0px #2c1810;
+    transition: all 0.2s ease-in-out;
+}
+
+.search-button:hover {
+    background: #2c1810;
+    color: #d4af37;
+    box-shadow: 2px 2px 0px #d4af37;
+    transform: translate(-2px, -2px);
+}
