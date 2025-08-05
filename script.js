@@ -15,9 +15,7 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
             body: JSON.stringify({ query })
         });
 
-        if (!res.ok) {
-            throw new Error(`Error API search: ${res.status}`);
-        }
+        if (!res.ok) throw new Error(`Error API search: ${res.status}`);
 
         const data = await res.json();
         await renderResults(data.results);
@@ -27,6 +25,7 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
     }
 });
 
+// Obtener token de Spotify
 async function getSpotifyToken() {
     const res = await fetch('/api/spotify-token');
     if (!res.ok) {
@@ -37,6 +36,7 @@ async function getSpotifyToken() {
     return data.access_token || null;
 }
 
+// Buscar datos en Spotify
 async function fetchSpotifyData(album, artist, token) {
     try {
         const query = encodeURIComponent(`${album} ${artist}`);
@@ -74,6 +74,24 @@ async function fetchSpotifyData(album, artist, token) {
     return { coverUrl: null, previewUrl: null };
 }
 
+// Buscar preview en iTunes si Spotify no lo tiene
+async function fetchItunesPreview(album, artist) {
+    try {
+        const query = encodeURIComponent(`${album} ${artist}`);
+        const res = await fetch(`https://itunes.apple.com/search?term=${query}&entity=song&limit=5`);
+        if (!res.ok) return null;
+
+        const data = await res.json();
+        if (data.results.length > 0) {
+            return data.results[0].previewUrl || null;
+        }
+    } catch (err) {
+        console.error("Error buscando preview en iTunes:", err);
+    }
+    return null;
+}
+
+// Renderizar resultados
 async function renderResults(results) {
     const container = document.getElementById('resultsContainer');
     container.innerHTML = '';
@@ -90,6 +108,11 @@ async function renderResults(results) {
             const spotifyData = await fetchSpotifyData(album.album, album.artist, token);
             coverUrl = spotifyData.coverUrl;
             previewUrl = spotifyData.previewUrl;
+        }
+
+        // Si Spotify no da preview → buscar en iTunes
+        if (!previewUrl) {
+            previewUrl = await fetchItunesPreview(album.album, album.artist);
         }
 
         const card = document.createElement('div');
@@ -112,6 +135,7 @@ async function renderResults(results) {
         container.appendChild(card);
     }
 
+    // Eventos de play/pausa con ecualizador
     document.querySelectorAll('.play-button').forEach(btn => {
         btn.addEventListener('click', () => {
             const url = btn.getAttribute('data-preview');
