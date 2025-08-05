@@ -86,3 +86,20 @@ button:hover {
     box-shadow: 2px 2px 0px #d4af37;
     transform: translate(-2px, -2px);
 }
+
+/* Animación de entrada del buscador */
+.search-container {
+    animation: fadeSlideIn 0.8s ease-out;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
