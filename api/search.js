@@ -30,6 +30,7 @@ REGLAS ESTRICTAS:
 4. Para cada disco elegido, selecciona entre 1 y 3 canciones relevantes **que estén listadas en el CSV para ese disco**.
 5. Devuelve EXACTAMENTE 5 discos.
 6. Devuelve la respuesta **únicamente** en JSON válido, con esta estructura:
+7. Evitar en la recomendación discos del mismo artista.
 
 {
   "results": [
